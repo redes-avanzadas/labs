@@ -1,0 +1,435 @@
+% simdoc.tex V3.0, 30 March 2010
+
+\documentclass[12pt, times]{simauth}
+
+\usepackage{moreverb}
+
+%\usepackage[T1,mtbold]{mathtime} % commented by ShareLaTeX Team because of compilation errors
+
+\usepackage[
+%dvips, % commented by ShareLaTeX Team because of compilation errors
+colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{upquote}
+\usepackage{epigraph}
+\usepackage{makeidx}
+\usepackage{framed}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{amsmath,cases,mathtools}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{alltt}
+\usepackage{MnSymbol,wasysym}
+\usepackage[pdftex,active,tightpage]{preview}
+\usetikzlibrary{babel}
+\usetikzlibrary{arrows,automata,positioning}
+\graphicspath{ {imagenes/} }
+\usepackage{pgfplots}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{calligra}
+\usetikzlibrary{er}
+
+
+\def\volumeyear{2010}
+
+\SetKwProg{Fn}{Function}{}{}
+
+\begin{document}
+
+%\runninghead{A.~N.~Other}
+
+\title{
+    {\fontfamily{ppl} \fontsize{30}{1} \selectfont{
+        Laboratorio 3: Cálculo de EIGRP }
+    }
+}
+
+\author{
+    {\fontfamily{ppl} \fontsize{14}{1} \selectfont{
+        Profesor: Luis Carlos Loaiza Canet\\
+        Priscilla Piedra Hidalgo y Carlos Martín Flores González\\
+        23 de Setiembre del 2017
+        }
+    }
+}
+
+%\address{John Wiley \& Sons, Ltd, The Atrium, Southern Gate, Chichester,
+%West Sussex, PO19~8SQ, UK}
+%
+%\corraddr{Journals Production Department, John Wiley \& Sons, Ltd,
+%The Atrium, Southern Gate, Chichester, West Sussex, PO19~8SQ, UK.}
+
+%\begin{abstract}
+%This paper describes the use of the \LaTeXe\ \textsf{simauth.cls}
+%class file for setting papers for \emph{Statistics in Medicine}.
+%\end{abstract}
+
+%\keywords{class file; \LaTeXe; \emph{Statist.\ Med.}}
+%
+\maketitle
+
+\tableofcontents
+
+\section{Router 1}
+\subsection{Extracto del commando \texttt{show ip route}}
+\begin{verbatim}
+Router#show ip route
+C    1.0.0.0/8 is directly connected, FastEthernet0/0
+D    2.0.0.0/8 [90/3196416] via 200.10.20.5, 00:00:47, Serial0/0/0
+D    3.0.0.0/8 [90/2172416] via 200.10.20.5, 00:00:47, Serial0/0/0
+D    4.0.0.0/8 [90/2684416] via 200.10.20.5, 00:00:47, Serial0/0/0
+     172.168.0.0/30 is subnetted, 1 subnets
+D    172.168.10.4 [90/2681856] via 200.10.20.5, 00:00:47, Serial0/0/0
+     192.168.10.0/30 is subnetted, 1 subnets
+D    192.168.10.4 [90/3193856] via 200.10.20.5, 00:00:47, Serial0/0/0
+     200.10.20.0/30 is subnetted, 1 subnets
+C    200.10.20.4 is directly connected, Serial0/0/0
+\end{verbatim}
+
+\subsection{Resultado del comando \texttt{show ip protocol}}
+\begin{verbatim}
+Routing Protocol is "eigrp  712 " 
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Default networks flagged in outgoing updates  
+  Default networks accepted from incoming updates 
+  EIGRP metric weight K1=1, K2=0, K3=1, K4=0, K5=0
+  EIGRP maximum hopcount 100
+  EIGRP maximum metric variance 1
+Redistributing: eigrp 712
+  Automatic network summarization is not in effect  
+  Maximum path: 4
+  Routing for Networks:  
+     200.10.20.4/30
+     1.0.0.0/30
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+    200.10.20.5     90            6191       
+  Distance: internal 90 external 170
+\end{verbatim}
+
+\newpage
+
+\subsection{Cálculo de cada tabla}
+
+\begin{minipage}[t]{0.45\linewidth}
+\subsubsection{\texttt{2.0.0.0/8 [90/3196416]}}\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(100 + 20000 + 20000 + 20000 + 100)}{10}\bigg) = \\
+        256 *& \bigg(6476 + \frac{60200}{10} \bigg) = \\
+        256 *& (6476 + 6020) = 3198976
+    \end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{3.0.0.0/8 [90/2172416]}}
+\begin{proof}
+\begin{align*}
+256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+256 *& (6476 + 2010) = 2172416
+\end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{4.0.0.0/8 [90/2684416]}}
+\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
+        256 *& (6476 + 4010) = 2684416
+    \end{align*}
+\end{proof}
+%%%\end{minipage} \hfill\begin{minipage}[t]{0.45\linewidth}  
+\subsubsection{\texttt{172.168.10.4 [90/2681856]}}
+\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
+        256 *& (6476 + 4000) = 2681856
+    \end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{192.168.10.4 [90/3193856]}}
+\begin{proof}
+\begin{align*}
+256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 20000)}{10}\bigg) = \\
+256 *& (6476 + 6000) = 3193856
+\end{align*}
+\end{proof}
+\end{minipage}
+
+
+\section{Router 2}
+\subsection{Extracto del resultado del comando \texttt{show ip route}}
+
+\begin{verbatim}
+D    1.0.0.0/8 [90/3196416] via 192.168.10.5, 00:27:30, Serial0/0/0
+C    2.0.0.0/8 is directly connected, FastEthernet0/0
+D    3.0.0.0/8 [90/2684416] via 192.168.10.5, 00:27:30, Serial0/0/0
+D    4.0.0.0/8 [90/2172416] via 192.168.10.5, 00:27:31, Serial0/0/0
+     172.168.0.0/30 is subnetted, 1 subnets
+D    172.168.10.4 [90/2681856] via 192.168.10.5, 00:27:30, Serial0/0/0
+     192.168.10.0/24 is variably subnetted, 2 subnets, 2 masks
+D    192.168.10.0/24 is a summary, 00:27:31, Null0
+C    192.168.10.4/30 is directly connected, Serial0/0/0
+     200.10.20.0/30 is subnetted, 1 subnets
+D    200.10.20.4 [90/3193856] via 192.168.10.5, 00:27:30, Serial0/0/0
+\end{verbatim}
+
+\subsection{Resultado del comando \texttt{show ip protocol}}
+\begin{verbatim}
+Routing Protocol is "eigrp  712 " 
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Default networks flagged in outgoing updates  
+  Default networks accepted from incoming updates 
+  EIGRP metric weight K1=1, K2=0, K3=1, K4=0, K5=0
+  EIGRP maximum hopcount 100
+  EIGRP maximum metric variance 1
+Redistributing: eigrp 712
+  Automatic network summarization is in effect  
+  Automatic address summarization: 
+    192.168.10.0/24 for FastEthernet0/0
+      Summarizing with metric 2169856
+  Maximum path: 4
+  Routing for Networks:  
+     192.168.10.4/30
+     2.0.0.0/24
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+    192.168.10.5    90            8001       
+  Distance: internal 90 external 170
+\end{verbatim}
+
+\subsection{Cálculo de cada tabla}
+\begin{minipage}[t]{0.45\linewidth}
+\subsubsection{\texttt{1.0.0.0/8 [90/3196416]}}\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(100 + 20000 + 20000 + 20000 + 100)}{10}\bigg) = \\
+        256 *& \bigg(6476 + \frac{60200}{10} \bigg) = \\
+        256 *& (6476 + 6020) = 3198976
+    \end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{3.0.0.0/8 [90/2684416]}}
+\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
+        256 *& (6476 + 4010) = 2684416
+    \end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{4.0.0.0/8 [90/2172416]}}
+\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 *& (6476 + 2010) = 2172416
+    \end{align*}
+\end{proof}\end{minipage} \hfill\begin{minipage}[t]{0.45\linewidth}  
+\subsubsection{\texttt{172.168.10.4 [90/2681856]}}
+\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
+        256 *& (6476 + 4000) = 2681856
+    \end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{200.10.20.4 [90/3193856]}}
+\begin{proof}
+\begin{align*}
+256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 20000)}{10}\bigg) = \\
+256 *& (6476 + 6000) = 3193856
+\end{align*}
+\end{proof}
+\end{minipage}
+
+
+\newpage
+
+\section{Router 3}
+\subsection{Extracto del resultado del commando \texttt{show ip route}}
+
+\begin{verbatim}
+Router#show ip route
+D    1.0.0.0/8 [90/2172416] via 200.10.20.6, 00:21:17, Serial0/0/1
+D    2.0.0.0/8 [90/2684416] via 172.168.10.6, 00:21:13, Serial0/0/0
+C    3.0.0.0/8 is directly connected, FastEthernet0/0
+D    4.0.0.0/8 [90/2172416] via 172.168.10.6, 00:21:13, Serial0/0/0
+     172.168.0.0/30 is subnetted, 1 subnets
+C    172.168.10.4 is directly connected, Serial0/0/0
+     192.168.10.0/30 is subnetted, 1 subnets
+D    192.168.10.4 [90/2681856] via 172.168.10.6, 00:21:13, Serial0/0/0
+     200.10.20.0/30 is subnetted, 1 subnets
+C    200.10.20.4 is directly connected, Serial0/0/1 
+\end{verbatim}
+
+\subsection{Resultado del comando \texttt{show ip protocol}}
+\begin{verbatim}
+Routing Protocol is "eigrp  712 " 
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Default networks flagged in outgoing updates  
+  Default networks accepted from incoming updates 
+  EIGRP metric weight K1=1, K2=0, K3=1, K4=0, K5=0
+  EIGRP maximum hopcount 100
+  EIGRP maximum metric variance 1
+Redistributing: eigrp 712
+  Automatic network summarization is not in effect  
+  Maximum path: 4
+  Routing for Networks:  
+     172.168.10.4/30
+     200.10.20.4/30
+     3.0.0.0/24
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+    200.10.20.6     90            6191       
+    172.168.10.6    90            9489       
+  Distance: internal 90 external 170
+\end{verbatim}
+
+\subsection{Cálculo de cada tabla}
+
+\begin{minipage}[t]{0.45\linewidth}
+\subsubsection{\texttt{1.0.0.0/8 [90/2172416]}}\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 *& (6476 + 2010) = 2172416
+    \end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{2.0.0.0/8 [90/2684416]}}
+\begin{proof}
+\begin{align*}
+256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
+256 *& (6476 + 4010) = 2684416
+\end{align*}
+\end{proof}\end{minipage} \hfill\begin{minipage}[t]{0.45\linewidth}  
+\subsubsection{\texttt{4.0.0.0/8 [90/2172416]}}
+\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 *& (6476 + 2010) = 2172416
+    \end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{192.168.10.4 [90/2681856]}}
+\begin{proof}
+\begin{align*}
+256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
+256 *& (6476 + 4010) = 2684416
+\end{align*}
+\end{proof}
+
+\end{minipage}
+
+
+\section{Router 4}
+\subsection{Extracto del resultado del commando \texttt{show ip route}}
+
+\begin{verbatim}
+Router#show ip route
+D    1.0.0.0/8 [90/2684416] via 172.168.10.5, 00:03:21, Serial0/0/0
+D    2.0.0.0/8 [90/2172416] via 192.168.10.6, 00:03:22, Serial0/0/1
+D    3.0.0.0/8 [90/2172416] via 172.168.10.5, 00:03:21, Serial0/0/0
+C    4.0.0.0/8 is directly connected, FastEthernet0/0
+     172.168.0.0/30 is subnetted, 1 subnets
+C    172.168.10.4 is directly connected, Serial0/0/0
+     192.168.10.0/30 is subnetted, 1 subnets
+C    192.168.10.4 is directly connected, Serial0/0/1
+     200.10.20.0/30 is subnetted, 1 subnets
+D    200.10.20.4 [90/2681856] via 172.168.10.5, 00:03:21, Serial0/0/0
+\end{verbatim}
+
+\subsection{Resultado del commando \texttt{show ip protocol}}
+\begin{verbatim}
+Routing Protocol is "eigrp  712 " 
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Default networks flagged in outgoing updates  
+  Default networks accepted from incoming updates 
+  EIGRP metric weight K1=1, K2=0, K3=1, K4=0, K5=0
+  EIGRP maximum hopcount 100
+  EIGRP maximum metric variance 1
+Redistributing: eigrp 712
+  Automatic network summarization is not in effect  
+  Maximum path: 4
+  Routing for Networks:  
+     192.168.10.4/30
+     172.168.10.4/30
+     4.0.0.0/24
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+    192.168.10.6    90            8001       
+    172.168.10.5    90            9490       
+  Distance: internal 90 external 170
+\end{verbatim}
+
+\subsection{Cálculo de cada tabla}
+
+\begin{minipage}[t]{0.45\linewidth}
+\subsubsection{\texttt{1.0.0.0/8 [90/2172416]}}\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
+        256 *& (6476 + 4010) = 2684416
+    \end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{2.0.0.0/8 [90/2172416]}}
+\begin{proof}
+\begin{align*}
+256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+256 *& (6476 + 2010) = 2172416
+\end{align*}
+\end{proof}\end{minipage} \hfill\begin{minipage}[t]{0.45\linewidth}  
+\subsubsection{\texttt{3.0.0.0/8 [90/2172416]}}
+\begin{proof}
+    \begin{align*}
+        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 *& (6476 + 2010) = 2172416
+    \end{align*}
+\end{proof}
+%%%
+\subsubsection{\texttt{200.10.20.4 [90/2681856]}}
+\begin{proof}
+\begin{align*}
+256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
+256 *& (6476 + 4000) = 2681856
+\end{align*}
+\end{proof}
+
+\end{minipage}
+
+
+%\begin{thebibliography}{9}
+%
+%    
+%\end{thebibliography}  
+
+
+%\appendix
+%
+%\section{Consenso en la cultura popular: la supercomputadora MAGI}
+%Nótese que esto es un \textbf{apéndice} \smiley{}. En una de mis series favoritas, aparece una supercomputadora la cual está necesita llegar a consesos para toma de decisiones y llevar a cabo alguna acción. Conforme iba leyendo sobre la tarea pues me recordé del caso y quise nombrarlo acá como el \emph{fun fact}. 
+%
+%La MAGI es una supercomputadora ficticia que vive dentro de la serie \emph{Neon Genesis Evangelion}. Es un trio de supercomputadores diseñadas por la Dr. Naoko Akagi gracias a su investigacio4n en bio-computadoras. A la sétima generación de computadoras orgánicas se les implantó tres diferentes aspectos de la personalidad de la Dr. Akagi utilizando el \emph{Personality Trasplant Operative System}. Las tres computadoras MAGI 
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
