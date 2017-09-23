@@ -15,8 +15,6 @@ colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 \usepackage[spanish]{babel}
 \usepackage{upquote}
 \usepackage{epigraph}
-\usepackage{makeidx}
-\usepackage{framed}
 \usepackage{pgf}
 \usepackage{tikz}
 \usepackage{amsmath,cases,mathtools}
@@ -26,7 +24,6 @@ colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 \usepackage{MnSymbol,wasysym}
 \usepackage[pdftex,active,tightpage]{preview}
 \usetikzlibrary{babel}
-\usetikzlibrary{arrows,automata,positioning}
 \graphicspath{ {imagenes/} }
 \usepackage{pgfplots}
 \usepackage[lined,boxed,commentsnumbered]{algorithm2e}
@@ -119,42 +116,42 @@ Redistributing: eigrp 712
 \begin{minipage}[t]{0.45\linewidth}
 \subsubsection{\texttt{2.0.0.0/8 [90/3196416]}}\begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(100 + 20000 + 20000 + 20000 + 100)}{10}\bigg) = \\
-        256 *& \bigg(6476 + \frac{60200}{10} \bigg) = \\
-        256 *& (6476 + 6020) = 3198976
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(100 + 20000 + 20000 + 20000 + 100)}{10}\bigg) = \\
+        256 \cdot & \bigg(6476 + \frac{60200}{10} \bigg) = \\
+        256 \cdot & (6476 + 6020) = 3198976
     \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{3.0.0.0/8 [90/2172416]}}
 \begin{proof}
-\begin{align*}
-256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
-256 *& (6476 + 2010) = 2172416
-\end{align*}
+    \begin{align*}
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 2010) = 2172416
+    \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{4.0.0.0/8 [90/2684416]}}
 \begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
-        256 *& (6476 + 4010) = 2684416
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 4010) = 2684416
     \end{align*}
 \end{proof}
 %%%\end{minipage} \hfill\begin{minipage}[t]{0.45\linewidth}  
 \subsubsection{\texttt{172.168.10.4 [90/2681856]}}
 \begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
-        256 *& (6476 + 4000) = 2681856
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
+        256 \cdot & (6476 + 4000) = 2681856
     \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{192.168.10.4 [90/3193856]}}
 \begin{proof}
-\begin{align*}
-256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 20000)}{10}\bigg) = \\
-256 *& (6476 + 6000) = 3193856
-\end{align*}
+    \begin{align*}
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 20000)}{10}\bigg) = \\
+        256 \cdot & (6476 + 6000) = 3193856
+    \end{align*}
 \end{proof}
 \end{minipage}
 
@@ -205,41 +202,41 @@ Redistributing: eigrp 712
 \begin{minipage}[t]{0.45\linewidth}
 \subsubsection{\texttt{1.0.0.0/8 [90/3196416]}}\begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(100 + 20000 + 20000 + 20000 + 100)}{10}\bigg) = \\
-        256 *& \bigg(6476 + \frac{60200}{10} \bigg) = \\
-        256 *& (6476 + 6020) = 3198976
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(100 + 20000 + 20000 + 20000 + 100)}{10}\bigg) = \\
+        256 \cdot & \bigg(6476 + \frac{60200}{10} \bigg) = \\
+        256 \cdot & (6476 + 6020) = 3198976
     \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{3.0.0.0/8 [90/2684416]}}
 \begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
-        256 *& (6476 + 4010) = 2684416
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 4010) = 2684416
     \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{4.0.0.0/8 [90/2172416]}}
 \begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
-        256 *& (6476 + 2010) = 2172416
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 2010) = 2172416
     \end{align*}
 \end{proof}\end{minipage} \hfill\begin{minipage}[t]{0.45\linewidth}  
 \subsubsection{\texttt{172.168.10.4 [90/2681856]}}
 \begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
-        256 *& (6476 + 4000) = 2681856
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
+        256 \cdot & (6476 + 4000) = 2681856
     \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{200.10.20.4 [90/3193856]}}
 \begin{proof}
-\begin{align*}
-256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 20000)}{10}\bigg) = \\
-256 *& (6476 + 6000) = 3193856
-\end{align*}
+    \begin{align*}
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 20000)}{10}\bigg) = \\
+        256 \cdot & (6476 + 6000) = 3193856
+    \end{align*}
 \end{proof}
 \end{minipage}
 
@@ -292,32 +289,32 @@ Redistributing: eigrp 712
 \begin{minipage}[t]{0.45\linewidth}
 \subsubsection{\texttt{1.0.0.0/8 [90/2172416]}}\begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
-        256 *& (6476 + 2010) = 2172416
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 2010) = 2172416
     \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{2.0.0.0/8 [90/2684416]}}
 \begin{proof}
-\begin{align*}
-256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
-256 *& (6476 + 4010) = 2684416
-\end{align*}
+    \begin{align*}
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 4010) = 2684416
+    \end{align*}
 \end{proof}\end{minipage} \hfill\begin{minipage}[t]{0.45\linewidth}  
 \subsubsection{\texttt{4.0.0.0/8 [90/2172416]}}
 \begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
-        256 *& (6476 + 2010) = 2172416
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 2010) = 2172416
     \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{192.168.10.4 [90/2681856]}}
 \begin{proof}
-\begin{align*}
-256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
-256 *& (6476 + 4010) = 2684416
-\end{align*}
+    \begin{align*}
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
+        256 \cdot & (6476 + 4000) = 2681856
+    \end{align*}
 \end{proof}
 
 \end{minipage}
@@ -369,32 +366,32 @@ Redistributing: eigrp 712
 \begin{minipage}[t]{0.45\linewidth}
 \subsubsection{\texttt{1.0.0.0/8 [90/2172416]}}\begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
-        256 *& (6476 + 4010) = 2684416
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 4010) = 2684416
     \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{2.0.0.0/8 [90/2172416]}}
 \begin{proof}
-\begin{align*}
-256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
-256 *& (6476 + 2010) = 2172416
-\end{align*}
+    \begin{align*}
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 2010) = 2172416
+    \end{align*}
 \end{proof}\end{minipage} \hfill\begin{minipage}[t]{0.45\linewidth}  
 \subsubsection{\texttt{3.0.0.0/8 [90/2172416]}}
 \begin{proof}
     \begin{align*}
-        256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
-        256 *& (6476 + 2010) = 2172416
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 100)}{10}\bigg) = \\
+        256 \cdot & (6476 + 2010) = 2172416
     \end{align*}
 \end{proof}
 %%%
 \subsubsection{\texttt{200.10.20.4 [90/2681856]}}
 \begin{proof}
-\begin{align*}
-256 *& \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
-256 *& (6476 + 4000) = 2681856
-\end{align*}
+    \begin{align*}
+        256 \cdot & \bigg(\frac{10^7}{1544} + \frac{(20000 + 20000)}{10}\bigg) = \\
+        256 \cdot & (6476 + 4000) = 2681856
+    \end{align*}
 \end{proof}
 
 \end{minipage}
