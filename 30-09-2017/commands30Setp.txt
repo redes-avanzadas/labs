@@ -1,0 +1,106 @@
+switch 1 entre switches sse tienen que usar enlaces tipo trunk, entre las maquiinas y los siwhtches son tipo access
+
+show vlan brief=para ver todas las fast ethernet
+
+Programar un switch
+
+crear vlan:
+
+vlan 10 
+name ESTUDIANTES
+vlan 20
+name PROFESORES
+do show vlan brief
+exit
+interface range fastEthernet 0/1-5
+sw mode access (estos puertos son para conectar access)
+siwtchport acces vlan 10
+interface range fastEthernet 0/6-10
+sw port mode access
+switchport access vlan 20
+intreface range fastEthernet0/11-12
+switchport mode access
+switchport access vlan 30
+do show vlan brief
+interface range fastEthernet0/23-24 (programar trunk)
+witchport mode trunk(levanta los puertos 23 y 24 como trunks y como son lineas truncales no se van a ver en el show)
+do show vlan brief
+switchport trunk allowed vlan 10,20 (para decir que solo la vlan 10 y 20 se van a progapar)
+
+El profe hizo un copy paste de esta config, los dos switches van en los extremos
+
+Las laptos las pega con un roll over cable
+
+Switch 2(el del centro)
+vlan 10
+vlan 20
+(no se necesita configurar los puertos por que no hay terminales pegadas)
+interface range fastEthernet 0/21-24
+sw mode trunk
+sw trunk allowed vlan10,20
+
+Ir a las terminales y programarles las direcciones IP
+192.168
+192.168.20.2
+192.168.10.3
+192.168.20.3
+
+Poner router 1841, se paga con un cable roll over, pegarlo en la fa20 y la fe0/0 del router(va a permitir el ruteo de todas las vlans on_stick)
+interface fastEhertnet0/0
+no shut
+
+interface fastEhertnet0/0.10 (crear sub interfaz donde tiene que tener direcicon ip)
+encapsulation dot1q 10
+ip address 192.168.10.1 255.255.255.0
+interface fa 0/0.20
+encapsulation dot1q 20
+ip address 192.10.20.1 255.255.255.0
+do show run
+
+Config swith principal
+interface fa 0/20
+switchport mode trunk
+switchport trunk allowed vlan 10,20
+
+Ir a las terminales a configruar el gateway
+192.168.10.1
+192.168.20.1
+192.168.10.1
+192.168.20.1
+
+Servidor pegado al router fa/0/1 en el oruter es el 172.168.10.4/30
+
+Router:
+interface fa0/1
+ip address 172.168.10.5 255.255.255.252
+no shut
+
+En el servidor
+ip: 172.168.10.6
+mask: 255.255.255.252
+gateway: 172.168.10.5
+
+Ir a services en el server, activar el dns, name seria test.co, addres: 172.168.10.6, darle add.
+
+EN las laptops:
+el DNS seria 172.168.10.6
+
+Ir al router a configruar el dhcp
+ip dhcp excludeed-address 192.168.10.1
+ip dhcp excludeed-address 192.168.20.1
+ip dhcp pool ALUMNOS
+network 192.168.10.0 255.255.255.0
+defoult-router 192.168.10.1
+dns-server 172.168.10.6
+ip dchp pool PROFESORES
+network 192.168.20.0 255.255.255.0
+defoult-router 192.168.20.1
+dns-server 172.168.10.6
+
+
+Como porbar el dhcp? se van a las terminales y se elige el DHCP en el desktop de la maquina, si hay errores en la programacion va a asignar cosas raras y algo que dice ARPA
+
+
+
+
+
