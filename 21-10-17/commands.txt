@@ -1,0 +1,41 @@
+lacp sw1
+
+interface range feo/1-10 (maximo hasta 8, aca va de 1-10 como ejemplo)
+channel-group 1 made active (channel-group #, no necesariamente es 1)
+!
+interface port-channel 1 (despues de haber programado lo de arriba se crea esta interfaz virutual con el mismo numero que se declaro arriba)
+switch port mode trunk
+switch port trunk allowed VLAN 10,20
+
+SW2
+interface range feo/1-10
+channel-group 1 mode passive
+
+PAgP SW1
+interface range feo/1-10
+channel-group 2 mode desirable
+!
+interface port-channel 2
+switch port mode trunk
+switchport trunk allowed VLAN 10,20
+
+SW2
+interface range feo/1-10
+channel group 2 mode auto
+
+Ethernechannel manueal
+SW1
+interface range feo/1-10
+channel-group 3 mode ON
+!
+interface port-channel 3
+switchport mode trunk
+switchport trunk allowed VLAN 10,20
+
+SW2
+interface range feo/1-10
+channel-group 3 mode ON
+!
+interface port-channel 3
+switch port mode trunk
+switchport trunk allowed VLAN 10,20
